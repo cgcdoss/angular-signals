@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { map, startWith } from 'rxjs';
+import { myGet } from '../services/http.service';
 
 @Component({
   selector: 'app-busca-cep',
@@ -17,7 +17,7 @@ import { map, startWith } from 'rxjs';
 })
 export class BuscaCepComponent {
 
-  private _http = inject(HttpClient);
+  private _myGetFn = myGet();
 
   public title = signal('angular-signals');
   public teste = signal({ nome: 'teste' });
@@ -37,7 +37,6 @@ export class BuscaCepComponent {
     );
   });
 
-
   constructor() {
     this.title.set('Busca de CE');
     this.title.update((prev) => prev + 'P');
@@ -52,7 +51,7 @@ export class BuscaCepComponent {
   }
 
   public obterEndereco$(cep: string) {
-    return this._http.get<{ erro: boolean }>(`https://viacep.com.br/ws/${cep}/json/`);
+    return this._myGetFn<{ erro: boolean }>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 
 }

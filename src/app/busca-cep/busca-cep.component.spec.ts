@@ -9,6 +9,7 @@ describe('BuscaCepComponent', () => {
   let component: BuscaCepComponent;
   let fixture: ComponentFixture<BuscaCepComponent>;
   let http: jasmine.SpyObj<HttpClient>;
+  let spyOnMyGetFn: any;
 
   beforeEach(() => {
     http = jasmine.createSpyObj('HttpClient', ['get']);
@@ -19,13 +20,15 @@ describe('BuscaCepComponent', () => {
       ],
       providers: [
         { provide: HttpClient, useValue: http },
-      ]
+      ],
     });
 
     http.get.and.returnValue(of({ cidade: 'tal' }));
 
     fixture = TestBed.createComponent(BuscaCepComponent);
     component = fixture.componentInstance;
+    spyOnMyGetFn = spyOn(component, '_myGetFn' as any);
+    spyOnMyGetFn.and.returnValue(of({}));
     fixture.detectChanges();
   });
 
@@ -39,11 +42,11 @@ describe('BuscaCepComponent', () => {
     input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
-    expect(http.get).toHaveBeenCalledWith(`https://viacep.com.br/ws/12345678/json/`);
+    expect(spyOnMyGetFn).toHaveBeenCalledWith(`https://viacep.com.br/ws/12345678/json/`);
   });
 
   it('Dado que houve um erro, ele deve ser tratado', () => {
-    http.get.and.returnValue(of({ erro: true }));
+    spyOnMyGetFn.and.returnValue(of({ erro: true }));
 
     const input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
     input.value = '12345678';
