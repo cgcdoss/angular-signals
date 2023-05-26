@@ -1,0 +1,1 @@
+:root{color-scheme:light dark}body{margin:0 36px;padding:0}input{border:none;border-bottom:1px solid #ccc;padding:8px;outline:none!important;transition:border-bottom .25s}input:focus{border-bottom-color:#5d0dff}::placeholder{color:#fff}@media (prefers-color-scheme: light){input{background-color:#9d9d9d;border-color:#333}input[disabled]{background-color:#505050}}
