@@ -2,7 +2,7 @@
 <button (click)="reset()" style="margin-left: 1rem;">Reset</button>
 
 <div class="main">
-    <div>
+    <div class="group">
         <input type="number" class="a" placeholder="A" [ngModel]="state().a"
             (ngModelChange)="onChangeInput('a', $event)" />
         <span class="spacer">Está para</span>
@@ -12,7 +12,7 @@
 
     <div>Assim como</div>
 
-    <div>
+    <div class="group">
         <input type="number" class="c" placeholder="C" [ngModel]="state().c"
             (ngModelChange)="onChangeInput('c', $event)" />
         <span class="spacer">Está para</span>

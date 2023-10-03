@@ -1,5 +1,5 @@
 <nav>
-    <div class="opcoes">
+    <div class="opcoes" style="height: 40px; overflow-x: auto; overflow-y: hidden;">
         <img ngSrc="assets/signals.png" width="64" height="32" priority>
         <a *ngFor="let r of rotas()" [routerLink]="r.rota" [class.active]="rotaAtual() === r.rota">
             {{ r.nome }}
